@@ -1,19 +1,29 @@
-const s1 = 'zzzz';
-const s2 = 'zzzzzzz';
+const arr = [-1, 150, 190, 170, -1, -1, 160, 180];
 
-function getCommonCharacterCount(str1, str2) {
-  const s1Arr = str1.split('');
-  const s2Arr = str2.split('');
+function sortByHeight(ar) {
+  const resArr = [];
 
-  const sumArr = [];
-
-  for (let i = 0; i < s1Arr.length; i++) {
-    const pos = s2Arr.indexOf(s1Arr[i]);
-    if (pos !== -1) {
-      sumArr.push(s2Arr.splice(pos, 1));
+  for (let i = 0; i < ar.length; i++) {
+    if (ar[i] === -1) {
+      resArr.push(ar[i]);
+    }
+    if (resArr.length > 0) {
+      let lastEl = resArr[resArr.length - 1];
+      if (lastEl !== -1) {
+        lastEl = resArr.pop();
+        if (lastEl < arr[i]) {
+          resArr.push(lastEl);
+          resArr.push(ar[i]);
+        } else {
+          resArr.push(ar[i]);
+          resArr.push(lastEl);
+        }
+      }
+    } else {
+      resArr.push(ar[i]);
     }
   }
-  return sumArr.length;
+  return resArr;
 }
 
-console.log(getCommonCharacterCount(s1, s2));
+console.log(sortByHeight(arr));
