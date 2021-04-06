@@ -1,22 +1,19 @@
-const m = [
-  [1, 2, 3, 4],
-  [0, 5, 0, 0],
-  [2, 0, 3, 3],
-];
+const s1 = 'zzzz';
+const s2 = 'zzzzzzz';
 
-function getMatrixElementsSum(matrix) {
-  let sum = 0;
+function getCommonCharacterCount(str1, str2) {
+  const s1Arr = str1.split('');
+  const s2Arr = str2.split('');
 
-  for (let i = 0; i < matrix[0].length; i++) {
-    for (let k = 0; k < matrix.length; k++) {
-      if (matrix[k][i] !== 0) {
-        sum += matrix[k][i];
-      } else {
-        k = matrix.length;
-      }
+  const sumArr = [];
+
+  for (let i = 0; i < s1Arr.length; i++) {
+    const pos = s2Arr.indexOf(s1Arr[i]);
+    if (pos !== -1) {
+      sumArr.push(s2Arr.splice(pos, 1));
     }
   }
-  return sum;
+  return sumArr.length;
 }
 
-console.log(getMatrixElementsSum(m));
+console.log(getCommonCharacterCount(s1, s2));
