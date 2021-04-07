@@ -1,17 +1,7 @@
-const num = 1001;
+const address = '00-1B-63-84-45-E6';
 
-function deleteDigit(n) {
-  const strNum = n.toString();
-  const arrNum = [];
-  let strLeft = '';
-  let strRight = '';
-  let strCommon = '';
-  for (let i = 0; i < strNum.length; i++) {
-    strLeft = strNum.slice(0, i);
-    strRight = strNum.slice(i + 1, strNum.length);
-    strCommon = strLeft + strRight;
-    arrNum.push(+strCommon);
-  }
-  return Math.max.apply(null, arrNum);
+function isMAC48Address(mac) {
+  const reg = /^[0-9a-fA-F]{2}(-[0-9a-fA-F]{2}){5}$/i;
+  return reg.test(mac);
 }
-console.log(deleteDigit(num));
+console.log(isMAC48Address(address));
