@@ -7,9 +7,9 @@
  *
  * @example
  * let matrix = [
-      [0, 1, 1, 2],
-      [0, 5, 0, 0],
-      [2, 0, 3, 3],
+ *     [0, 1, 1, 2],
+ *     [0, 5, 0, 0],
+ *     [2, 0, 3, 3],
  * ];
 *The result should be 9
 */
@@ -28,7 +28,6 @@ function getMatrixElementsSum(m) {
   }
   return sum;
 }
-
 // function getMatrixElementsSum(/* matrix */) {
 //   throw new Error('Not implemented');
 // }

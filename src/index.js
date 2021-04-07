@@ -1,29 +1,26 @@
-const arr = [-1, 150, 190, 170, -1, -1, 160, 180];
+const arr = [-1, -1, -1, -1, -1];
 
 function sortByHeight(ar) {
-  const resArr = [];
+  const arrPosOne = [];
 
-  for (let i = 0; i < ar.length; i++) {
-    if (ar[i] === -1) {
-      resArr.push(ar[i]);
+  ar.forEach((el, i) => {
+    if (el === -1) {
+      arrPosOne.push(i);
     }
-    if (resArr.length > 0) {
-      let lastEl = resArr[resArr.length - 1];
-      if (lastEl !== -1) {
-        lastEl = resArr.pop();
-        if (lastEl < arr[i]) {
-          resArr.push(lastEl);
-          resArr.push(ar[i]);
-        } else {
-          resArr.push(ar[i]);
-          resArr.push(lastEl);
-        }
-      }
-    } else {
-      resArr.push(ar[i]);
-    }
+  });
+
+  const arrNum = ar.filter((num) => num !== -1).sort((a, b) => a - b);
+
+  if (arrNum) {
+    arrPosOne.forEach((el) => {
+      arrNum.splice(el, 0, -1);
+    });
+  } else {
+    arrPosOne.forEach(() => {
+      arrNum.push(-1);
+    });
   }
-  return resArr;
+  return arrNum;
 }
 
 console.log(sortByHeight(arr));
