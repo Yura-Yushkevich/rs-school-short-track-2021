@@ -1,7 +1,17 @@
-const address = '00-1B-63-84-45-E6';
+const names = ['doc', 'doc', 'image', 'doc(1)', 'doc'];
 
-function isMAC48Address(mac) {
-  const reg = /^[0-9a-fA-F]{2}(-[0-9a-fA-F]{2}){5}$/i;
-  return reg.test(mac);
+function renameFiles(arrayNames) {
+  const arrNames = arrayNames;
+
+  for (let i = 0; i < arrNames.length; i++) {
+    let suffix = 1;
+    for (let k = i + 1; k < arrNames.length; k++) {
+      if (arrNames[i] === arrNames[k]) {
+        arrNames[k] = `${arrNames[k]}(${suffix})`;
+        suffix++;
+      }
+    }
+  }
+  return arrNames;
 }
-console.log(isMAC48Address(address));
+console.log(renameFiles(names));
