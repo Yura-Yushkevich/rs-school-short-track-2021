@@ -16,24 +16,48 @@
  *   this.next = null;
  * }
  */
+
 const ListNode = require('../extensions/list-node');
+
+function SinglyList() {
+  this.length = 0;
+  this.head = null;
+}
+
+SinglyList.prototype.add = function(value) {
+  const node = new ListNode(value);
+  let currentNode = this.head;
+
+  if (!currentNode) {
+    this.head = node;
+    this.length++;
+    return node;
+  }
+
+  // 2-ой случай: не пустой список
+  while (currentNode.next) {
+    currentNode = currentNode.next;
+  }
+  currentNode.next = node;
+  this.length++;
+  return node;
+};
 
 function removeKFromList(l, k) {
   let currentNode = l;
   let nextNode = currentNode.next;
-  const newNode = new ListNode();
+  const newNode = new SinglyList();
 
   while (nextNode !== null) {
     // console.log(k);
     // console.log(currentNode.value);
     if (currentNode.value !== k) {
-      newNode.value = currentNode.value;
-      newNode.next = currentNode.next;
+      newNode.add(currentNode.value);
     }
     nextNode = currentNode.next;
     currentNode = nextNode;
   }
-  console.log(newNode.valueOf());
+  return newNode.head;
 }
 
 module.exports = removeKFromList;
