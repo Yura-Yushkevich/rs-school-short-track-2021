@@ -1,21 +1,32 @@
-const str = 'abbcca';
+const domains = [
+  'code.yandex.ru',
+  'music.yandex.ru',
+  'yandex.ru'];
 
-function encodeLine(s) {
-  let res = '';
+function getDNSStats(arr) {
+  const arrMap = new Map();
 
-  for (let i = 0; i < s.length; i++) {
-    const char = s[i];
-    if (char !== s[i + 1]) {
-      res += char;
-    } else {
-      let count = 1;
-      while (char === s[i + 1]) {
-        count++;
-        i++;
+  for (let i = 0; i < arr.length; i++) {
+    const arrStr = arr[i].split('.');
+    let addressPart = '';
+    for (let k = arrStr.length - 1; k >= 0; k--) {
+      addressPart += `.${arrStr[k]}`;
+      if (!arrMap.has(addressPart)) {
+        arrMap.set(addressPart, 1);
+      } else {
+        arrMap.set(addressPart, arrMap.get(addressPart) + 1);
       }
-      res += `${count}${char}`;
     }
   }
+
+  const res = Object.fromEntries(arrMap);
   return res;
 }
-console.log(encodeLine(str));
+console.log(getDNSStats(domains));
+
+// * {
+//   *   '.ru': 3,
+//   *   '.ru.yandex': 3,
+//   *   '.ru.yandex.code': 1,
+//   *   '.ru.yandex.music': 1,
+//   * }
