@@ -1,7 +1,11 @@
-// const l = [3, 1, 2, 3, 4, 5];
-// const k = 3;
+const n = 91;
 
-// function removeKFromList(list, key) {
-
-// }
-// console.log(removeKFromList(l, k));
+function getSumOfDigits(num) {
+  const arrNum = num.toString().split('').map(Number);
+  let arrSum = arrNum.reduce((sum, cur) => sum + cur);
+  if (arrSum.toString().length > 1) {
+    arrSum = getSumOfDigits(arrSum);
+  }
+  return arrSum;
+}
+console.log(getSumOfDigits(n));
