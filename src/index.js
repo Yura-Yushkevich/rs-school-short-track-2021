@@ -1,32 +1,52 @@
-const domains = [
-  'code.yandex.ru',
-  'music.yandex.ru',
-  'yandex.ru'];
+const ListNode = require('../extensions/list-node');
 
-function getDNSStats(arr) {
-  const arrMap = new Map();
-
-  for (let i = 0; i < arr.length; i++) {
-    const arrStr = arr[i].split('.');
-    let addressPart = '';
-    for (let k = arrStr.length - 1; k >= 0; k--) {
-      addressPart += `.${arrStr[k]}`;
-      if (!arrMap.has(addressPart)) {
-        arrMap.set(addressPart, 1);
-      } else {
-        arrMap.set(addressPart, arrMap.get(addressPart) + 1);
-      }
-    }
+class List {
+  constructor() {
+    this.head = null;
+    this.length = null;
   }
 
-  const res = Object.fromEntries(arrMap);
-  return res;
-}
-console.log(getDNSStats(domains));
+  get size() {
+    return this.length;
+  }
 
-// * {
-//   *   '.ru': 3,
-//   *   '.ru.yandex': 3,
-//   *   '.ru.yandex.code': 1,
-//   *   '.ru.yandex.music': 1,
-//   * }
+  enqueue(element) {
+    const node = new ListNode(element);
+    console.log(node);
+    let currentNode = this.head;
+
+    if (!currentNode) {
+      this.head = node;
+      this.length++;
+      return node;
+    }
+
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
+    currentNode.next = node;
+    this.length++;
+    return node;
+  }
+
+  dequeue() {
+    let currentNode = this.head;
+    const nodeValue = currentNode.value;
+    currentNode = currentNode.next;
+    this.head = currentNode;
+    this.length--;
+    return nodeValue;
+  }
+}
+
+const listTest = new List();
+listTest.enqueue(5);
+listTest.enqueue(7);
+
+// console.log(listTest.head);
+// console.log(listTest.length);
+
+listTest.dequeue();
+
+// console.log(listTest.head);
+// console.log(listTest.length);

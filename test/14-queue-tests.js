@@ -16,9 +16,13 @@ describe('14-queue', () => {
 
   it.optional('should create a Queue with the methods', () => {
     const queue = new Queue();
+    // console.log(queue);
+    // queue.enqueue(34);
+    // console.log(queue);
     assert.doesNotThrow(() => queue.enqueue(5));
     assert.doesNotThrow(() => queue.enqueue(6));
     assert.doesNotThrow(() => queue.enqueue(7));
+    // console.log(queue);
     assert.strictEqual(queue.dequeue(), 5);
     assert.strictEqual(queue.dequeue(), 6);
   });

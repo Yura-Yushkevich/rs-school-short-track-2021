@@ -34,7 +34,6 @@ SinglyList.prototype.add = function(value) {
     return node;
   }
 
-  // 2-ой случай: не пустой список
   while (currentNode.next) {
     currentNode = currentNode.next;
   }
@@ -49,8 +48,6 @@ function removeKFromList(l, k) {
   const newNode = new SinglyList();
 
   while (nextNode !== null) {
-    // console.log(k);
-    // console.log(currentNode.value);
     if (currentNode.value !== k) {
       newNode.add(currentNode.value);
     }
